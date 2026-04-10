@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Trilha de Onboarding · Otom</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0B1E3D;
+  --blue:#1A50A0;
+  --blue-mid:#2563C4;
+  --blue-light:#3B82E0;
+  --blue-pale:#E8F0FB;
+  --blue-pale2:#D1E2F8;
+  --accent:#00AEEF;
+  --accent-pale:#E0F6FF;
+  --white:#FFFFFF;
+  --bg:#F4F7FC;
+  --surface:#FFFFFF;
+  --border:rgba(26,80,160,0.12);
+  --text:#0B1E3D;
+  --text-muted:#4A6080;
+  --text-faint:#8FA5C2;
+  --green:#16A34A;
+  --green-pale:#DCFCE7;
+  --radius:14px;
+  --radius-sm:8px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh}
+
+/* ── TOPBAR ── */
+.topbar{
+  background:var(--navy);
+  padding:0 2rem;
+  height:56px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.topbar-brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.topbar-logo{
+  width:32px;height:32px;
+  background:var(--blue-light);
+  border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+}
+.topbar-logo svg{width:18px;height:18px;fill:white}
+.topbar-name{
+  font-family:'Syne',sans-serif;
+  font-size:15px;font-weight:700;
+  color:var(--white);
+  letter-spacing:0.02em;
+}
+.topbar-name span{color:var(--accent);font-weight:600}
+.topbar-right{
+  font-size:12px;
+  color:rgba(255,255,255,0.45);
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+}
+
+/* ── HERO ── */
+.hero{
+  background:linear-gradient(135deg,var(--navy) 0%,var(--blue) 100%);
+  padding:4rem 2rem 3.5rem;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 70% 80% at 80% 50%,rgba(0,174,239,0.15) 0%,transparent 60%),
+             radial-gradient(ellipse 50% 60% at 20% 50%,rgba(255,255,255,0.04) 0%,transparent 60%);
+  pointer-events:none;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--accent);background:rgba(0,174,239,0.15);border:1px solid rgba(0,174,239,0.3);
+  border-radius:999px;padding:5px 14px;margin-bottom:1.5rem;
+}
+.hero-title{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(26px,5vw,46px);font-weight:800;
+  color:var(--white);line-height:1.1;
+  margin-bottom:0.5rem;letter-spacing:-0.02em;
+}
+.hero-title span{color:var(--accent)}
+.hero-subtitle{
+  font-family:'Syne',sans-serif;font-size:clamp(13px,2vw,16px);font-weight:600;
+  color:rgba(255,255,255,0.5);letter-spacing:0.2em;text-transform:uppercase;
+  margin-bottom:1.25rem;
+}
+.hero-desc{
+  font-size:15px;color:rgba(255,255,255,0.7);
+  max-width:540px;margin:0 auto 2.5rem;
+}
+
+/* ── GLOBAL PROGRESS ── */
+.global-progress{
+  display:inline-flex;flex-direction:column;align-items:center;
+  background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);
+  border-radius:var(--radius);padding:1.25rem 2.5rem;gap:10px;
+  min-width:280px;
+}
+.gp-label{font-size:12px;color:rgba(255,255,255,0.55);text-transform:uppercase;letter-spacing:0.08em}
+.gp-track{
+  width:100%;height:8px;
+  background:rgba(255,255,255,0.15);border-radius:999px;overflow:hidden;
+}
+.gp-fill{
+  height:100%;border-radius:999px;
+  background:linear-gradient(90deg,var(--accent),#5BC8FF);
+  transition:width 0.6s cubic-bezier(.4,0,.2,1);
+  width:0%;
+}
+.gp-nums{
+  display:flex;gap:24px;
+}
+.gp-num{text-align:center}
+.gp-num-val{
+  font-family:'Syne',sans-serif;font-size:22px;font-weight:700;
+  color:var(--white);display:block;line-height:1;
+}
+.gp-num-lbl{font-size:11px;color:rgba(255,255,255,0.45);text-transform:uppercase;letter-spacing:0.06em}
+
+/* ── MAIN ── */
+.main{max-width:1000px;margin:0 auto;padding:2.5rem 1.5rem 5rem}
+
+/* ── ABOUT SECTION ── */
+.about-section{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:2rem;margin-bottom:2rem;
+  position:relative;overflow:hidden;
+}
+.about-section::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;
+  width:4px;background:linear-gradient(180deg,var(--blue-light),var(--accent));
+  border-radius:4px 0 0 4px;
+}
+.about-header{display:flex;align-items:center;gap:14px;margin-bottom:1.25rem;cursor:pointer;user-select:none}
+.about-icon{
+  width:44px;height:44px;border-radius:10px;
+  background:var(--blue-pale);display:flex;align-items:center;justify-content:center;
+  font-size:20px;flex-shrink:0;
+}
+.about-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--text)}
+.about-toggle{margin-left:auto;font-size:18px;color:var(--text-faint);transition:transform 0.2s}
+.about-body{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.about-card{
+  background:var(--blue-pale);border-radius:var(--radius-sm);padding:1rem 1.1rem;
+}
+.about-card-title{font-size:12px;font-weight:500;color:var(--blue);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:6px}
+.about-card-text{font-size:13px;color:var(--text-muted);line-height:1.5}
+.about-link{
+  display:inline-flex;align-items:center;gap:6px;
+  margin-top:1.25rem;padding:8px 18px;
+  background:var(--navy);color:white;font-size:13px;font-weight:500;
+  border-radius:var(--radius-sm);text-decoration:none;
+  transition:background 0.18s;
+}
+.about-link:hover{background:var(--blue)}
+
+/* ── MODULE CARD ── */
+.module{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);margin-bottom:1.5rem;
+  overflow:hidden;
+  animation:fadeUp 0.4s ease both;
+}
+.module:nth-child(2){animation-delay:0.05s}
+.module:nth-child(3){animation-delay:0.1s}
+.module:nth-child(4){animation-delay:0.15s}
+.module:nth-child(5){animation-delay:0.2s}
+
+.module-header{
+  padding:1.25rem 1.5rem;
+  display:flex;align-items:center;gap:14px;
+  cursor:pointer;user-select:none;
+  border-bottom:1px solid transparent;
+  transition:border-color 0.2s;
+}
+.module.open .module-header{border-bottom-color:var(--border)}
+.module-num{
+  width:40px;height:40px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Syne',sans-serif;font-size:15px;font-weight:700;
+  color:white;flex-shrink:0;
+}
+.m1 .module-num{background:linear-gradient(135deg,#1A50A0,#2563C4)}
+.m2 .module-num{background:linear-gradient(135deg,#0F6E8C,#00AEEF)}
+.m3 .module-num{background:linear-gradient(135deg,#0B4F8C,#185FA5)}
+.m4 .module-num{background:linear-gradient(135deg,#1A3060,#2B5299)}
+
+.module-info{flex:1;min-width:0}
+.module-title{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--text);margin-bottom:3px}
+.module-meta{font-size:12px;color:var(--text-faint)}
+
+.module-right{display:flex;align-items:center;gap:14px;flex-shrink:0}
+.module-pct{
+  font-family:'Syne',sans-serif;font-size:14px;font-weight:700;
+  color:var(--blue);min-width:38px;text-align:right;
+}
+.module-chevron{font-size:16px;color:var(--text-faint);transition:transform 0.25s}
+.module.open .module-chevron{transform:rotate(180deg)}
+
+/* mini progress bar in header */
+.module-bar-wrap{width:80px;height:6px;background:var(--blue-pale2);border-radius:999px;overflow:hidden}
+.module-bar-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--blue-mid),var(--accent));transition:width 0.5s ease;width:0%}
+
+/* ── MODULE BODY ── */
+.module-body{display:none;padding:1.25rem 1.5rem 1.5rem}
+.module.open .module-body{display:block}
+
+.lesson-list{display:flex;flex-direction:column;gap:8px;margin-bottom:1.25rem}
+
+.lesson-item{
+  display:flex;align-items:flex-start;gap:12px;
+  background:var(--bg);border:1px solid var(--border);
+  border-radius:var(--radius-sm);padding:0.85rem 1rem;
+  cursor:pointer;transition:border-color 0.18s,background 0.18s;
+}
+.lesson-item:hover{border-color:rgba(26,80,160,0.25);background:#EEF3FC}
+.lesson-item.done{background:var(--green-pale);border-color:rgba(22,163,74,0.2)}
+
+.lesson-check{
+  width:20px;height:20px;border-radius:5px;
+  border:2px solid var(--blue-pale2);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;margin-top:1px;
+  transition:all 0.18s;background:white;
+}
+.lesson-item.done .lesson-check{
+  background:var(--green);border-color:var(--green);
+}
+.lesson-check-icon{display:none;color:white;font-size:12px;font-weight:700}
+.lesson-item.done .lesson-check-icon{display:block}
+
+.lesson-content{flex:1;min-width:0}
+.lesson-name{
+  font-size:14px;font-weight:500;color:var(--text);
+  margin-bottom:3px;line-height:1.4;
+  transition:color 0.18s;
+}
+.lesson-item.done .lesson-name{color:var(--text-muted);text-decoration:line-through;text-decoration-color:rgba(0,0,0,0.2)}
+.lesson-tag-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.ltag{
+  font-size:11px;font-weight:500;padding:2px 8px;border-radius:999px;
+}
+.ltag-blue{background:var(--blue-pale);color:var(--blue)}
+.ltag-teal{background:#E0F6FF;color:#0076A8}
+.ltag-dc{background:#FEF3C7;color:#92400E}
+.ltag-cabo{background:#F1F5F9;color:#475569}
+.ltag-pon{background:#E8FFF4;color:#065F46}
+.ltag-optica{background:#EDE9FE;color:#5B21B6}
+.ltag-video{background:#FEE2E2;color:#991B1B}
+.ltag-green{background:var(--green-pale);color:var(--green)}
+
+.lesson-link{
+  display:inline-flex;align-items:center;gap:4px;
+  font-size:11px;color:var(--blue);text-decoration:none;
+  padding:2px 0;transition:color 0.15s;
+  flex-shrink:0;margin-top:1px;
+}
+.lesson-link:hover{color:var(--blue-light)}
+
+/* completion banner */
+.module-complete-banner{
+  display:none;
+  align-items:center;gap:10px;
+  background:var(--green-pale);border:1px solid rgba(22,163,74,0.25);
+  border-radius:var(--radius-sm);padding:10px 14px;margin-top:8px;
+  font-size:13px;font-weight:500;color:var(--green);
+}
+.module-complete-banner.show{display:flex}
+
+/* ── FOOTER ── */
+.footer{
+  text-align:center;padding:2rem;
+  font-size:12px;color:var(--text-faint);
+  border-top:1px solid var(--border);
+}
+.footer strong{color:var(--blue);font-weight:500}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(14px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* ── RESPONSIVE ── */
+@media(max-width:600px){
+  .module-bar-wrap{display:none}
+  .hero{padding:3rem 1.25rem 2.5rem}
+  .global-progress{min-width:auto;width:100%;padding:1rem 1.5rem}
+  .about-body{grid-template-columns:1fr}
+  .module-header{padding:1rem 1.1rem}
+  .module-body{padding:1rem 1.1rem 1.25rem}
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<nav class="topbar">
+  <div class="topbar-brand">
+    <div class="topbar-logo">
+      <svg viewBox="0 0 24 24"><path d="M12 2L3 7v10l9 5 9-5V7L12 2zm0 2.18L19 8.5v7L12 19.32 5 15.5v-7L12 4.18z"/></svg>
+    </div>
+    <span class="topbar-name">Otom <span>· One Team One Mission</span></span>
+  </div>
+  <span class="topbar-right">Onboarding</span>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-badge">🚀 Trilha de Onboarding</div>
+  <p class="hero-subtitle">One Team One Mission</p>
+  <h1 class="hero-title">Bem-vindo à <span>Otom</span></h1>
+  <p class="hero-desc">Esta trilha foi criada para te guiar pelos fundamentos do nosso setor. Complete cada módulo no seu ritmo e acompanhe sua evolução.</p>
+
+  <div class="global-progress">
+    <span class="gp-label">Progresso geral da trilha</span>
+    <div class="gp-track"><div class="gp-fill" id="gp-fill"></div></div>
+    <div class="gp-nums">
+      <div class="gp-num"><span class="gp-num-val" id="gp-done">0</span><span class="gp-num-lbl">Concluídos</span></div>
+      <div class="gp-num"><span class="gp-num-val" id="gp-total">0</span><span class="gp-num-lbl">Total</span></div>
+      <div class="gp-num"><span class="gp-num-val" id="gp-pct">0%</span><span class="gp-num-lbl">Progresso</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- SOBRE A EMPRESA -->
+  <div class="about-section">
+    <div class="about-header" onclick="toggleAbout()">
+      <div class="about-icon">🏢</div>
+      <div>
+        <div style="font-family:'Syne',sans-serif;font-size:17px;font-weight:700;color:var(--text)">Sobre a Otom</div>
+        <div style="font-size:12px;color:var(--text-faint)">Conheça a empresa, o segmento e os serviços</div>
+      </div>
+      <span class="about-toggle" id="about-toggle">▾</span>
+    </div>
+    <div id="about-body">
+      <div class="about-body">
+        <div class="about-card">
+          <div class="about-card-title">O que fazemos</div>
+          <div class="about-card-text">Soluções integradas de telecomunicações, redes e infraestrutura para empresas e operadoras.</div>
+        </div>
+        <div class="about-card">
+          <div class="about-card-title">Segmento</div>
+          <div class="about-card-text">Telecomunicações, TI e infraestrutura de redes. Atendemos desde empresas até grandes operadoras.</div>
+        </div>
+        <div class="about-card">
+          <div class="about-card-title">Áreas de atuação</div>
+          <div class="about-card-text">Projetos de redes, cabeamento estruturado, fibra óptica, data centers e redes PON.</div>
+        </div>
+        <div class="about-card">
+          <div class="about-card-title">Nossa missão</div>
+          <div class="about-card-text">Um time, uma missão. Entregamos conectividade com excelência técnica e compromisso com o cliente.</div>
+        </div>
+      </div>
+      <a class="about-link" href="https://www.otom.com.br/" target="_blank" rel="noopener">Visitar site da Otom ↗</a>
+    </div>
+  </div>
+
+  <!-- MÓDULO 1 -->
+  <div class="module m1 open" data-module="m1">
+    <div class="module-header" onclick="toggleModule(this)">
+      <div class="module-num">01</div>
+      <div class="module-info">
+        <div class="module-title">Infraestrutura e Cabeamento</div>
+        <div class="module-meta" id="m1-meta">0 de 6 concluídos</div>
+      </div>
+      <div class="module-right">
+        <div class="module-bar-wrap"><div class="module-bar-fill" id="m1-bar"></div></div>
+        <span class="module-pct" id="m1-pct">0%</span>
+        <span class="module-chevron">▾</span>
+      </div>
+    </div>
+    <div class="module-body">
+      <div class="lesson-list">
+
+        <div class="lesson-item" data-id="m1-1" onclick="toggleLesson(this)">
+          <div class="lesson-check"><span class="lesson-check-icon">✓</span></div>
+          <div class="lesson-content">
+            <div class="lesson-name">Aterramento em Sites de Telecomunicações</div>
+            <div class="lesson-tag-row">
+              <span class="ltag ltag-blue">Infraestrutura</span>
+              <a class="lesson-link" href="https://teleco.com.br/tutoriais/tutorialaterra/Default.asp" target="_blank" rel="noopener" onclick="e=>{e.stopPropagation()}">Acessar tutorial ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="lesson-item" data-id="m1-2" onclick="toggleLesson(this)">
+          <div class="lesson-check"><span class="lesson-check-icon">✓</span></div>
+          <div class="lesson-content">
+            <div class="lesson-name">Cabeamento e Infraestrutura de Redes</div>
+            <div class="lesson-tag-row">
+              <span class="ltag ltag-cabo">Cabeamento</span>
+              <a class="lesson-link" href="https://teleco.com.br/tutoriais/tutorialcabeamento/Default.asp" target="_blank" rel="noopener">Acessar tutorial ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="lesson-item" data-id="m1-3" onclick="toggleLesson(this)">
+          <div class="lesson-check"><span class="lesson-check-icon">✓</span></div>
+          <div class="lesson-content">
+            <div class="lesson-name">Cabeamento Estruturado – Estudo de Caso IFMG I</div>
+            <div class="lesson-tag-row">
+              <span class="ltag ltag-cabo">Cabeamento</span>
+              <a class="lesson-link" href="https://teleco.com.br/tutoriais/tutorialcabestr1/default.asp" target="_blank" rel="noopener">Acessar tutorial ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="lesson-item" data-id="m1-4" onclick="toggleLesson(this)">
+          <div class="lesson-check"><span class="lesson-check-icon">✓</span></div>
+          <div class="lesson-content">
+            <div class="lesson-name">Cabeamento Estruturado – Estudo de Caso IFMG II</div>
+            <div class="lesson-tag-row">
+              <span class="ltag ltag-cabo">Cabeamento</span>
+              <a class="lesson-link" href="https://teleco.com.br/tutoriais/tutorialcabestr2/Default.asp" target="_blank" rel="noopener">Acessar tutorial ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="lesson-item" data-id="m1-5" onclick="toggleLesson(this)">
+          <div class="lesson-check"><span class="lesson-check-icon">✓</span></div>
+          <div class="lesson-content">
+            <div class="lesson-name">Redes de Computadores I: Falhas em Mineradora</div>
+            <div class="lesson-tag-row">
+              <span class="ltag ltag-teal">Redes</span>
+              <a class="lesson-link" href="https://teleco.com.br/tutoriais/tutorialmineradora1/default.asp" target="_blank" rel="noopener">Acessar tutorial ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="lesson-item" data-id="m1-6" onclick="toggleLesson(this)">
+          <div class="lesson-check"><span class="lesson-check-icon">✓</span></div>
+          <div class="lesson-content">
+            <div class="lesson-name">Redes de Computadores II: Falhas em Mineradora</div>
+            <div class="lesson-tag-row">
+              <span class="ltag ltag-teal">Redes</span>
+              <a class="lesson-link" href="https://teleco.com.br/tutoriais/tutorialmineradora2/Default.asp" target="_blank" rel="noopener">Acessar tutorial ↗</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="module-complete-banner" id="m1-banner">🎉 Módulo 1 concluído! Avance para o próximo.</div>
+    </div>
+  </div>
+
+  <!-- MÓDULO 2 -->
+  <div class="module m2" data-module="m2">
+    <div class="module-header" onclick="toggleModule(this)">
+      <div class="module-num">02</div>
+      <div class="module-info">
+        <div class="module-title">Redes e Rede PON</div>
+        <div class="module-meta" id="m2-meta">0 de 4 concluídos</div>
+      </div>
+      <div class="module-right">
+        <div class="module-bar-wrap"><div class="module-bar-fill" id="m2-bar"></div></div>
+        <span class="module-pct" id="m2-pct">0%</span>
+        <span class="module-chevron">▾</span>
+      </div>
+    </div>
+    <div class="module-body">
+      <div class="lesson-list">
+
+        <div class="lesson-item" data-id="m2-1" onclick="toggleLesson(this)">
+          <div class="lesson-check"><span class="lesson-check-icon">✓</span></div>
+          <div class="lesson-content">
+            <div class="lesson-name">Redes de Computadores I: Laboratórios Híbridos com Acesso Remoto</div>
+            <div class="lesson-tag-row">
+              <span class="ltag ltag-teal">Redes</span>
+              <a class="lesson-link" href="https://teleco.com.br/tutoriais/tutorialredecomp1/Default.asp" target="_blank" rel="noopener">Acessar tutorial ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="lesson-item" data-id="m2-2" onclick="toggleLesson(this)">
+          <div class="lesson-check"><span class="lesson-check-icon">✓</span></div>
+          <div class="lesson-content">
+            <div class="lesson-name">Redes de Computadores II: Laboratórios Híbridos com Acesso Remoto</div>
+            <div class="lesson-tag-row">
+              <span class="ltag ltag-teal">Redes</span>
+              <a class="lesson-link" href="https://teleco.com.br/tutoriais/tutorialredecomp2/Default.asp" target="_blank" rel="noopener">Acessar tutorial ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="lesson-item" data-id="m2-3" onclick="toggleLesson(this)">
+          <div class="lesson-check"><span class="lesson-check-icon">✓</span></div>
+          <div class="lesson-content">
+            <div class="lesson-name">Redes PON I: Novas Tecnologias e Tendências</div>
+            <div class="lesson-tag-row">
+              <span class="ltag ltag-pon">PON</span>
+              <a class="lesson-link" href="https://teleco.com.br/tutoriais/tutorialpontec1/Default.asp" target="_blank" rel="noopener">Acessar tutorial ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="lesson-item" data-id="m2-4" onclick="toggleLesson(this)">
+          <div class="lesson-check"><span class="lesson-check-icon">✓</span></div>
+          <div class="lesson-content">
+            <div class="lesson-name">Redes PON II: Novas Tecnologias e Tendências</div>
+            <div class="lesson-tag-row">
+              <span class="ltag ltag-pon">PON</span>
+              <a class="lesson-link" href="https://teleco.com.br/tutoriais/tutorialpontec2/Default.asp" target="_blank" rel="noopener">Acessar tutorial ↗</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="module-complete-banner" id="m2-banner">🎉 Módulo 2 concluído! Avance para o próximo.</div>
+    </div>
+  </div>
+
+  <!-- MÓDULO 3 -->
+  <div class="module m3" data-module="m3">
+    <div class="module-header" onclick="toggleModule(this)">
+      <div class="module-num">03</div>
+      <div class="module-info">
+        <div class="module-title">Rede Óptica</div>
+        <div class="module-meta" id="m3-meta">0 de 5 concluídos</div>
+      </div>
+      <div class="module-right">
+        <div class="module-bar-wrap"><div class="module-bar-fill" id="m3-bar"></div></div>
+        <span class="module-pct" id="m3-pct">0%</span>
+        <span class="module-chevron">▾</span>
+      </div>
+    </div>
+    <div class="module-body">
+      <div class="lesson-list">
+
+        <div class="lesson-item" data-id="m3-1" onclick="toggleLesson(this)">
+          <div class="lesson-check"><span class="lesson-check-icon">✓</span></div>
+          <div class="lesson-content">
+            <div class="lesson-name">Conceitos Básicos de Fibra Óptica – Módulo I</div>
+            <div class="lesson-tag-row">
+              <span class="ltag ltag-optica">Fibra Óptica</span>
+              <a class="lesson-link" href="https://teleco.com.br/tutoriais/tutorialfoI/Default.asp" target="_blank" rel="noopener">Acessar tutorial ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="lesson-item" data-id="m3-2" onclick="toggleLesson(this)">
+          <div class="lesson-check"><span class="lesson-check-icon">✓</span></div>
+          <div class="lesson-content">
+            <div class="lesson-name">Conceitos Básicos de Fibra Óptica – Módulo II</div>
+            <div class="lesson-tag-row">
+              <span class="ltag ltag-optica">Fibra Óptica</span>
+              <a class="lesson-link" href="https://teleco.com.br/tutoriais/tutorialfoII/Default.asp" target="_blank" rel="noopener">Acessar tutorial ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="lesson-item" data-id="m3-3" onclick="toggleLesson(this)">
+          <div class="lesson-check"><span class="lesson-check-icon">✓</span></div>
+          <div class="lesson-content">
+            <div class="lesson-name">Conceitos Básicos de Fibra Óptica – Módulo III</div>
+            <div class="lesson-tag-row">
+              <span class="ltag ltag-optica">Fibra Óptica</span>
+              <a class="lesson-link" href="https://teleco.com.br/tutoriais/tutorialfoIII/Default.asp" target="_blank" rel="noopener">Acessar tutorial ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="lesson-item" data-id="m3-4" onclick="toggleLesson(this)">
+          <div class="lesson-check"><span class="lesson-check-icon">✓</span></div>
+          <div class="lesson-content">
+            <div class="lesson-name">Conceitos Básicos de Fibra Óptica – Módulo IV</div>
+            <div class="lesson-tag-row">
+              <span class="ltag ltag-optica">Fibra Óptica</span>
+              <a class="lesson-link" href="https://teleco.com.br/tutoriais/tutorialfoIV/Default.asp" target="_blank" rel="noopener">Acessar tutorial ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="lesson-item" data-id="m3-5" onclick="toggleLesson(this)">
+          <div class="lesson-check"><span class="lesson-check-icon">✓</span></div>
+          <div class="lesson-content">
+            <div class="lesson-name">Treinamento Fibra Óptica — Playlist YouTube</div>
+            <div class="lesson-tag-row">
+              <span class="ltag ltag-video">Vídeo</span>
+              <a class="lesson-link" href="https://www.youtube.com/watch?v=1rAgs8zCO5Y&list=PLruxV6Ot1BiTNWUyznPGZrhw_kZ9JQVQx" target="_blank" rel="noopener">Assistir playlist ↗</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="module-complete-banner" id="m3-banner">🎉 Módulo 3 concluído! Um módulo restante.</div>
+    </div>
+  </div>
+
+  <!-- MÓDULO 4 -->
+  <div class="module m4" data-module="m4">
+    <div class="module-header" onclick="toggleModule(this)">
+      <div class="module-num">04</div>
+      <div class="module-info">
+        <div class="module-title">Data Center</div>
+        <div class="module-meta" id="m4-meta">0 de 2 concluídos</div>
+      </div>
+      <div class="module-right">
+        <div class="module-bar-wrap"><div class="module-bar-fill" id="m4-bar"></div></div>
+        <span class="module-pct" id="m4-pct">0%</span>
+        <span class="module-chevron">▾</span>
+      </div>
+    </div>
+    <div class="module-body">
+      <div class="lesson-list">
+
+        <div class="lesson-item" data-id="m4-1" onclick="toggleLesson(this)">
+          <div class="lesson-check"><span class="lesson-check-icon">✓</span></div>
+          <div class="lesson-content">
+            <div class="lesson-name">Data Center I: Técnicas e Práticas para Instalação Segura</div>
+            <div class="lesson-tag-row">
+              <span class="ltag ltag-dc">Data Center</span>
+              <a class="lesson-link" href="https://teleco.com.br/tutoriais/tutorialdcseg1/Default.asp" target="_blank" rel="noopener">Acessar tutorial ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="lesson-item" data-id="m4-2" onclick="toggleLesson(this)">
+          <div class="lesson-check"><span class="lesson-check-icon">✓</span></div>
+          <div class="lesson-content">
+            <div class="lesson-name">Data Center II: Técnicas e Práticas para Instalação Segura</div>
+            <div class="lesson-tag-row">
+              <span class="ltag ltag-dc">Data Center</span>
+              <a class="lesson-link" href="https://teleco.com.br/tutoriais/tutorialdcseg2/Default.asp" target="_blank" rel="noopener">Acessar tutorial ↗</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="module-complete-banner" id="m4-banner">🏆 Trilha completa! Parabéns pelo seu compromisso com o aprendizado.</div>
+    </div>
+  </div>
+
+</main>
+
+<footer class="footer">
+  <strong>Otom · One Team One Mission</strong> · Trilha de Onboarding · Seu progresso é salvo automaticamente neste dispositivo
+</footer>
+
+<script>
+const STORAGE_KEY = 'otom_trail_v1';
+
+function loadState(){
+  try{ return JSON.parse(localStorage.getItem(STORAGE_KEY))||{}; }
+  catch(e){ return {}; }
+}
+function saveState(state){
+  try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+  catch(e){}
+}
+
+function getModuleLessons(moduleId){
+  return document.querySelectorAll(`[data-id^="${moduleId}-"]`);
+}
+
+function updateModule(moduleId){
+  const lessons = getModuleLessons(moduleId);
+  const total = lessons.length;
+  const done = [...lessons].filter(l=>l.classList.contains('done')).length;
+  const pct = total ? Math.round(done/total*100) : 0;
+
+  const bar = document.getElementById(`${moduleId}-bar`);
+  const pctEl = document.getElementById(`${moduleId}-pct`);
+  const metaEl = document.getElementById(`${moduleId}-meta`);
+  const banner = document.getElementById(`${moduleId}-banner`);
+
+  if(bar) bar.style.width = pct+'%';
+  if(pctEl) pctEl.textContent = pct+'%';
+  if(metaEl) metaEl.textContent = `${done} de ${total} concluídos`;
+  if(banner) banner.classList.toggle('show', done===total);
+}
+
+function updateGlobal(){
+  const all = document.querySelectorAll('.lesson-item');
+  const total = all.length;
+  const done = [...all].filter(l=>l.classList.contains('done')).length;
+  const pct = total ? Math.round(done/total*100) : 0;
+
+  document.getElementById('gp-fill').style.width = pct+'%';
+  document.getElementById('gp-done').textContent = done;
+  document.getElementById('gp-total').textContent = total;
+  document.getElementById('gp-pct').textContent = pct+'%';
+}
+
+function toggleLesson(el){
+  // prevent firing when clicking the link itself
+  if(event && event.target.tagName==='A') return;
+  const id = el.dataset.id;
+  const moduleId = id.split('-')[0];
+  el.classList.toggle('done');
+
+  const state = loadState();
+  state[id] = el.classList.contains('done');
+  saveState(state);
+
+  updateModule(moduleId);
+  updateGlobal();
+}
+
+function toggleModule(headerEl){
+  const module = headerEl.closest('.module');
+  module.classList.toggle('open');
+}
+
+function toggleAbout(){
+  const body = document.getElementById('about-body');
+  const toggle = document.getElementById('about-toggle');
+  const isOpen = body.style.display !== 'none' && body.style.display !== '';
+  // start open by default
+  if(body.getAttribute('data-init')==null){
+    body.setAttribute('data-init','1');
+    body.style.display='none';
+    toggle.style.transform='rotate(-90deg)';
+    return;
+  }
+  if(isOpen){
+    body.style.display='none';
+    toggle.style.transform='rotate(-90deg)';
+  } else {
+    body.style.display='';
+    toggle.style.transform='';
+  }
+}
+
+// Init: restore state
+(function init(){
+  const state = loadState();
+  document.querySelectorAll('.lesson-item').forEach(el=>{
+    const id = el.dataset.id;
+    if(state[id]) el.classList.add('done');
+  });
+  ['m1','m2','m3','m4'].forEach(updateModule);
+  updateGlobal();
+  // Init global progress bar animation on load
+  setTimeout(()=>{
+    const all = document.querySelectorAll('.lesson-item');
+    const done = [...all].filter(l=>l.classList.contains('done')).length;
+    const pct = all.length ? Math.round(done/all.length*100) : 0;
+    document.getElementById('gp-fill').style.width=pct+'%';
+  }, 200);
+})();
+</script>
+</body>
+</html>
